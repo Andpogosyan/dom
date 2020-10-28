@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- задача 2
+   Создайте функцию clear(elem), которая удаляет всё содержимое из elem. -->
+    <!-- <ol id="elem">
+        <li>Привет</li>
+        <li>Мир</li>
+    </ol>
+
+    <script>
+        let el = document.querySelector('ol');
+
+        function clear(elem) {
+            el.innerHTML = '';
+        }
+
+        clear(el);
+    </script> -->
+    <!-- 
+    задача 4 -->
+    <!-- 
+
+
+    <h1>Создать список</h1>
+    <ul id="list">
+    </ul>
+    <script>
+        let result = '';
+        while (result = prompt('Введите текст для элемента списка')) {
+            let li = document.createElement('li');
+            li.textContent = result;
+            list.append(li);
+        }
+    </script> -->
+
+    <!-- задача 5 -->
+    <!-- <div id="container"></div>
+    <script>
+        let data = {
+            "Рыбы": {
+                "форель": {},
+                "лосось": {}
+            },
+
+            "Деревья": {
+                "Огромные": {
+                    "секвойя": {},
+                    "дуб": {}
+                },
+                "Цветковые": {
+                    "яблоня": {},
+                    "магнолия": {}
+                }
+            }
+        };
+
+        function createTree(container, obj) {
+            container.innerHTML = createTreeText(obj);
+        }
+
+        function createTreeText(obj) {
+            let li = '';
+            let ul;
+            for (let key in obj) {
+                li += '<li>' + key + createTreeText(obj[key]) + '</li>';
+            }
+            if (li) {
+                ul = '<ul>' + li + '</ul>'
+            }
+            return ul || '';
+        }
+
+
+        createTree(container, data);
+    </script> -->
+
+    <!-- задача 6  -->
+    <!-- Есть дерево, организованное в виде вложенных списков ul/li.
+
+Напишите код, который добавит каждому элементу списка <li> 
+    количество вложенных в него элементов. Узлы нижнего уровня, без детей – пропускайте. -->
+
+    <!-- <ul>
+        <li>Животные
+            <ul>
+                <li>Млекопитающие
+                    <ul>
+                        <li>Коровы</li>
+                        <li>Ослы</li>
+                        <li>Собаки</li>
+                        <li>Тигры</li>
+                    </ul>
+                </li>
+                <li>Другие
+                    <ul>
+                        <li>Змеи</li>
+                        <li>Птицы</li>
+                        <li>Ящерицы</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>Рыбы
+            <ul>
+                <li>Аквариумные
+                    <ul>
+                        <li>Гуппи</li>
+                        <li>Скалярии</li>
+                    </ul>
+                </li>
+                <li>Морские
+                    <ul>
+                        <li>Морская форель</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+
+    <script>
+        document.querySelectorAll("li").forEach((i) => {
+            if (i.children.length)
+                i.firstChild.data += `[${i.querySelectorAll("li").length}]`;
+        });
+    </script> -->
+
+
+    <!-- задача 7
+    Напишите функцию createCalendar(elem, year, month).
+
+Вызов функции должен создать календарь для заданного месяца month 
+в году year и вставить его в elem.
+
+Календарь должен быть таблицей, где неделя – это <tr>, 
+    а день – это <td>. У таблицы должен быть заголовок с 
+        названиями дней недели, каждый день – <th>, первым днём недели должен быть понедельник.
+
+Например, createCalendar(cal, 2012, 9) сгенерирует в cal следующий календарь: -->
+
+
+    <!-- <script>
+        function createCalendar(elem, year, month) {
+            month = month + 1;
+            let startMonday = new Date(year, month);
+            startMonday.setDate(startMonday.getDate() - startMonday.getDay() - 1);
+
+
+            let table = document.createElement("table");
+
+            let days = ["пн", "вт", "ср", "чт", "пт", "сб", "вс"];
+
+            let firstTr = document.createElement("tr");
+            table.append(firstTr);
+            days.forEach(item => {
+                let td = document.createElement("td");
+                td.innerHTML = item;
+                firstTr.append(td);
+            });
+
+            for (let week = 0; week < 5; week++) {
+                let tr = document.createElement("tr");
+                table.append(tr);
+                for (let day = 0; day < 7; day++) {
+                    let td = document.createElement("td");
+                    if (startMonday.getMonth() == month) td.innerHTML = startMonday.getDate();
+                    tr.append(td);
+                    startMonday.setDate(startMonday.getDate() + 1);
+                }
+            }
+            table.style.border = 'black solid 1px';
+            document.body.append(table);
+
+        }
+        createCalendar(document.body, 2013, 5)
+    </script> -->
+    <!-- 
+    задача 8
+    Создайте цветные часы как в примере ниже: -->
+
+    <!-- <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span><br>
+    <button id="Start">Start</button>
+    <button id="Stop">Stop</button>
+
+    <script>
+        hours.style.color = "red";
+        minutes.style.color = "green";
+        seconds.style.color = "blue";
+
+        let watchON = false;
+        let timer;
+
+        render();
+        switchWatch();
+
+        function render() {
+            let date = new Date();
+
+            hours.innerHTML = editTime(date.getHours());
+            minutes.innerHTML = editTime(date.getMinutes());
+            seconds.innerHTML = editTime(date.getSeconds());
+        }
+
+        function editTime(n) {
+            return n < 10 ? "0" + n : n;
+        }
+
+
+        function switchWatch() {
+            if (!watchON) {
+                timer = setInterval(render, 1000);
+                watchON = !watchON;
+            }
+        }
+
+        Start.onclick = () => switchWatch();
+        Stop.onclick = () => {
+            clearInterval(timer);
+            watchON = false;
+        }
+    </script> -->
+
+    <!-- задача 9
+    Напишите код для вставки <li>2</li><li>3</li> между этими двумя <li>:
+     -->
+    <!-- <ul id="ul">
+        <li id="one">1</li>
+        <li id="two">4</li>
+    </ul>
+
+    <script>
+        one.insertAdjacentHTML('afterend', '<li>2</li><li>3</li>');
+    </script> -->
+
+    <!-- задача 10
+    сортировать таблицу по имени
+
+
+    <table id="table">
+        <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Возраст</th>
+        </tr>
+        <tr>
+            <td>John</td>
+            <td>Smith</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>Pete</td>
+            <td>Brown</td>
+            <td>15</td>
+        </tr>
+        <tr>
+            <td>Ann</td>
+            <td>Lee</td>
+            <td>5</td>
+        </tr>
+    </table>
+
+    <script>
+        let rows = Array.from(document.querySelectorAll('table tr:not(:first-child)'));
+
+        for (let i = 0; i < rows.length - 1; i++) {
+            for (let j = 0; j < rows.length - i - 1; j++) {
+                if (rows[j].firstElementChild.innerText > rows[j + 1].firstElementChild.innerText) {
+                    let temp = rows[j];
+                    rows[j] = rows[j + 1];
+                    rows[j + 1] = temp;
+                }
+            }
+        }
+
+        table.append(...rows);
+    </script> -->
+</body>
+
+</html>
